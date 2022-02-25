@@ -1,27 +1,26 @@
+using System.Threading.Tasks;
 using UnityEditor;
-using static System.IO.Directory;
-using static System.IO.Path;
-using static UnityEngine.Application;
 using static UnityEditor.AssetDatabase;
 
-namespace Editor
+namespace StowyTools.Editor
 {
     public static class ToolsMenu
     {
         [MenuItem("Tools/Setup/Create Default Folders")]
         public static void CreateDefaultFolders()
         {
-            CreateDirectories("_Project", "Scripts", "Sprites", "Scenes");
+            Folders.CreateDirectories("_Project", "Scripts", "Sprites", "Scenes");
             Refresh();
         }
 
-        public static void CreateDirectories(string root, params string[] directories)
-        {
-            string fullPathString = Combine(dataPath, root);
-            foreach (string directory in directories)
-            {
-                CreateDirectory(Combine(fullPathString, directory));
-            }
-        }
+        [MenuItem("Tools/Setup/Load New Manifest")]
+        public static async void LoadNewManifest() =>
+            await Packages.ReplacePackagesFromGist("0c04492a8aa4797a3dbe797f1d051220");
+
+        [MenuItem("Tools/Setup/Packages/New Input System")]
+        public static void AddInputSystem() => Packages.InstallUnityPackage("inputsystem");
+        
+        [MenuItem("Tools/Setup/Packages/Post Processing")]
+        public static void AddPostProcessing() => Packages.InstallUnityPackage("postprocessing");
     }
 }
