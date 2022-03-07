@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Net.Http;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using System.Threading.Tasks;
 
 namespace StowyTools.Editor
 {
@@ -9,26 +6,14 @@ namespace StowyTools.Editor
     {
         public static async Task ReplacePackagesFromGist(string id, string user = "St0wy")
         {
-            string url = GetGistUrl(id, user);
-            string contents = await GetContents(url);
+            string url = GithubGist.GetGistUrl(id, user);
+            string contents = await GithubGist.GetContents(url);
             ReplacePackageFile(contents);
-        }
-
-        public static string GetGistUrl(string id, string user = "St0wy") =>
-            $"https://gist.githubusercontent.com/{user}/{id}/raw/";
-
-        public static async Task<string> GetContents(string url)
-        {
-            using var client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(url);
-            string content = await response.Content.ReadAsStringAsync();
-            return content;
         }
 
         public static void ReplacePackageFile(string contents)
         {
-            string existing = Path.Combine(Application.dataPath, "../Packages/manifest.json");
-            File.WriteAllText(existing, contents);
+            FileHelper.WriteFileInProject("Packages/manifest.json", contents);
             UnityEditor.PackageManager.Client.Resolve();
         }
 
