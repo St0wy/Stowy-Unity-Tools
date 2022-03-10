@@ -1,8 +1,10 @@
 {
-    "name": "Stowy.Tools",
-    "rootNamespace": "StowyTools",
+    "name": "StowyTools.Editor",
+    "rootNamespace": "StowyTools.Editor",
     "references": [],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
