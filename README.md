@@ -11,7 +11,11 @@ Allows to :
 ## How to install
 
 In the Package Manager, click the "+" on the top left and click "Add package from git URL...".
-Then paste `https://github.com/St0wy/Stowy-Unity-Tools.git` in the text box.
+Then paste the following line of code in the text box.
+
+```
+https://github.com/St0wy/Stowy-Unity-Tools.git
+```
 
 ## How to use
 
